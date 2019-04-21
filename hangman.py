@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import time
 import curses
 
 def read_drawing(filename):
@@ -14,16 +14,16 @@ def draw_title(scr, drawing):
     scr.attron(curses.color_pair(1))
     scr.attron(curses.A_BOLD)
     start_row = 2
-    start_col = 13
+    start_col = 17
     idx = 0
     for item in drawing:
         scr.addstr(start_row + idx, start_col, item)
         idx = idx + 1
 
-def draw_echafaud1(scr, drawing):
+def draw_echafaud(scr, drawing):
     scr.attron(curses.color_pair(2))
     scr.attron(curses.A_BOLD)
-    start_row = 4
+    start_row = 8
     start_col = 1
     idx = 0
     for item in drawing:
@@ -32,15 +32,33 @@ def draw_echafaud1(scr, drawing):
 
 def draw_screen(scr):
     title = read_drawing('res/title.txt')
-    echafaud1 = read_drawing('res/hangmanstage1.txt')
+    echafaud1 = read_drawing('res/echafaud1.txt')
+    echafaud2 = read_drawing('res/echafaud2.txt')
+    echafaud3 = read_drawing('res/echafaud3.txt')
+    echafaud4 = read_drawing('res/echafaud4.txt')
+    echafaud5 = read_drawing('res/echafaud5.txt')
+    echafaud6 = read_drawing('res/echafaud6.txt')
+    echafaud7 = read_drawing('res/echafaud7.txt')
+    echafaud8 = read_drawing('res/echafaud8.txt')
+    echafaud9 = read_drawing('res/echafaud9.txt')
+    echafaud10 = read_drawing('res/echafaud10.txt')
+    n = 0
     key = 0
     scr.clear()
     curses.start_color()
-    curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
+    curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
     draw_title(scr,title)
-    draw_echafaud1(scr,echafaud1)
-    scr.refresh()
+    for i in range(3):
+        n = i+1
+        if n == 1:
+            draw_echafaud(scr, echafaud1)
+        if n == 2:
+            draw_echafaud(scr, echafaud2)
+        if n == 3:
+            draw_echafaud(scr, echafaud3)
+        scr.refresh()
+        time.sleep(1)
     while (key != ord('q')):
         key = scr.getch()
 
