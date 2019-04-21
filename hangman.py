@@ -42,6 +42,7 @@ def draw_screen(scr):
     echafaud8 = read_drawing('res/echafaud8.txt')
     echafaud9 = read_drawing('res/echafaud9.txt')
     echafaud10 = read_drawing('res/echafaud10.txt')
+    echafauds = [echafaud1, echafaud2, echafaud3, echafaud4, echafaud5, echafaud6, echafaud7, echafaud8, echafaud9, echafaud10]
     n = 0
     key = 0
     scr.clear()
@@ -49,14 +50,9 @@ def draw_screen(scr):
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
     draw_title(scr,title)
-    for i in range(3):
-        n = i+1
-        if n == 1:
-            draw_echafaud(scr, echafaud1)
-        if n == 2:
-            draw_echafaud(scr, echafaud2)
-        if n == 3:
-            draw_echafaud(scr, echafaud3)
+    for i in range(10):
+        required = echafauds[i]
+        draw_echafaud(scr, required)
         scr.refresh()
         time.sleep(1)
     while (key != ord('q')):
