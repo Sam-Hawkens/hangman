@@ -50,13 +50,68 @@ def draw_screen(scr):
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
     draw_title(scr,title)
-    for i in range(10):
-        required = echafauds[i]
-        draw_echafaud(scr, required)
-        scr.refresh()
-        time.sleep(1)
-    while (key != ord('q')):
+    w = 'Yamatoe'
+    word =[]
+    guess = []
+    errors = []
+    word_work(w, word, guess)
+    while '-' in guess:
         key = scr.getch()
+        letter = chr(key)
+        res = letter_work(word, guess, errors, letter)
+        draw_echafaud(scr, echafauds[len(errors)])
+        draw_guess(scr, guess)
+        draw_errors(scr, errors)
+        scr.refresh()
+
+
+def word_work(str, word, guess):
+    for item in str:
+        item = item.upper()
+        word.append(item)
+        if item.isalpha() != True :
+            guess.append(item)
+        else:
+            guess.append('-')
+
+def letter_work(word, guess, errors, new_letter):
+    result = 'Wrong!'
+    new_letter = new_letter.upper()
+    if new_letter.isalpha() != True:
+        result = 'Not a letter...'
+    else:
+        if new_letter in errors:
+                result = 'Already wrong.'
+        elif new_letter in guess:
+                result = 'Already right!'
+        else:
+            for i in range(len(word)):
+                if new_letter == word[i]:
+                    guess[i] = new_letter
+                    result = 'Right!'
+            if result == 'Wrong!':
+                errors.append(new_letter)
+    return result
+        #if new_letter
+def draw_guess(scr, drawing):
+    scr.attron(curses.color_pair(2))
+    scr.attron(curses.A_BOLD)
+    start_row = 17
+    start_col = 27
+    idx = 0
+    for item in drawing:
+        scr.addstr(start_row, start_col + idx, item)
+        idx = idx + 2
+
+def draw_errors(scr, drawing):
+    scr.attron(curses.color_pair(1))
+    scr.attron(curses.A_BOLD)
+    start_row = 27
+    start_col = 27
+    idx = 0
+    for item in drawing:
+        scr.addstr(start_row, start_col + idx, item)
+        idx = idx + 2
 
 def main():
     curses.wrapper(draw_screen)
