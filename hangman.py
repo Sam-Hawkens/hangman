@@ -13,8 +13,8 @@ def read_drawing(filename):
 def draw_title(scr, drawing):
     scr.attron(curses.color_pair(1))
     scr.attron(curses.A_BOLD)
-    start_row = 2
-    start_col = 17
+    start_row = 1
+    start_col = 37
     idx = 0
     for item in drawing:
         scr.addstr(start_row + idx, start_col, item)
@@ -23,7 +23,7 @@ def draw_title(scr, drawing):
 def draw_echafaud(scr, drawing):
     scr.attron(curses.color_pair(2))
     scr.attron(curses.A_BOLD)
-    start_row = 8
+    start_row = 1
     start_col = 1
     idx = 0
     for item in drawing:
@@ -43,6 +43,8 @@ def draw_screen(scr):
     echafaud9 = read_drawing('res/echafaud9.txt')
     echafaud10 = read_drawing('res/echafaud10.txt')
     echafauds = [echafaud1, echafaud2, echafaud3, echafaud4, echafaud5, echafaud6, echafaud7, echafaud8, echafaud9, echafaud10]
+    message = read_drawing('res/message.txt')
+    status_bar = read_drawing('res/status_bar.txt')
     n = 0
     key = 0
     scr.clear()
@@ -58,11 +60,19 @@ def draw_screen(scr):
     while '-' in guess:
         key = scr.getch()
         letter = chr(key)
+        if letter == '1':
+            exit()
         res = letter_work(word, guess, errors, letter)
         draw_echafaud(scr, echafauds[len(errors)])
         draw_guess(scr, guess)
         draw_errors(scr, errors)
+        draw_status_bar(scr, status_bar)
         scr.refresh()
+    draw_message(scr, message)
+    scr.refresh()
+    time.sleep(2)
+
+
 
 
 def word_work(str, word, guess):
@@ -97,8 +107,9 @@ def draw_guess(scr, drawing):
     scr.attron(curses.color_pair(2))
     scr.attron(curses.A_BOLD)
     start_row = 17
-    start_col = 27
+    start_col = 47
     idx = 0
+    scr.addstr(start_row, start_col - 6, 'Word:')
     for item in drawing:
         scr.addstr(start_row, start_col + idx, item)
         idx = idx + 2
@@ -106,12 +117,33 @@ def draw_guess(scr, drawing):
 def draw_errors(scr, drawing):
     scr.attron(curses.color_pair(1))
     scr.attron(curses.A_BOLD)
-    start_row = 27
-    start_col = 27
+    start_row = 20
+    start_col = 49
     idx = 0
+    scr.addstr(start_row, start_col - 8, 'Errors:')
     for item in drawing:
         scr.addstr(start_row, start_col + idx, item)
         idx = idx + 2
+
+def draw_message(scr, drawing):
+    scr.attron(curses.color_pair(2))
+    scr.attron(curses.A_BOLD)
+    start_row = 22
+    start_col = 47
+    idx = 0
+    for item in drawing:
+        scr.addstr(start_row + idx, start_col, item)
+        idx = idx + 1
+
+def draw_status_bar(scr, drawing):
+    scr.attron(curses.color_pair(1))
+    scr.attron(curses.A_BOLD)
+    start_row = 52
+    start_col = 40
+    idx = 0
+    for item in drawing:
+        scr.addstr(start_row + idx, start_col, item)
+        idx = idx + 1
 
 def main():
     curses.wrapper(draw_screen)
