@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import time
 import curses
+import random
 
 def read_drawing(filename):
     drawing = []
@@ -44,7 +45,6 @@ def draw_screen(scr):
     echafaud10 = read_drawing('res/echafaud10.txt')
     echafauds = [echafaud1, echafaud2, echafaud3, echafaud4, echafaud5, echafaud6, echafaud7, echafaud8, echafaud9, echafaud10]
     message = read_drawing('res/message.txt')
-    status_bar = read_drawing('res/status_bar.txt')
     n = 0
     key = 0
     scr.clear()
@@ -52,7 +52,8 @@ def draw_screen(scr):
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
     draw_title(scr,title)
-    w = 'Yamatoe'
+    options = ["Endgame", "Marvel", "Iron Man", "Harry Potter", "Gryffindor"]
+    w = random.choice(options)
     word =[]
     guess = []
     errors = []
@@ -66,7 +67,7 @@ def draw_screen(scr):
         draw_echafaud(scr, echafauds[len(errors)])
         draw_guess(scr, guess)
         draw_errors(scr, errors)
-        draw_status_bar(scr, status_bar)
+        draw_status_bar(scr)
         scr.refresh()
     draw_message(scr, message)
     scr.refresh()
@@ -135,15 +136,12 @@ def draw_message(scr, drawing):
         scr.addstr(start_row + idx, start_col, item)
         idx = idx + 1
 
-def draw_status_bar(scr, drawing):
+def draw_status_bar(scr):
     scr.attron(curses.color_pair(1))
     scr.attron(curses.A_BOLD)
-    start_row = 52
-    start_col = 40
-    idx = 0
-    for item in drawing:
-        scr.addstr(start_row + idx, start_col, item)
-        idx = idx + 1
+    status = "Press 1 to Exit"
+    height, width = scr.getmaxyx()
+    scr.addstr (height -1, (width//2)-(len(status)//2), status)
 
 def main():
     curses.wrapper(draw_screen)
