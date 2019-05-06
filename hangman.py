@@ -68,6 +68,7 @@ def draw_screen(scr):
         draw_guess(scr, guess)
         draw_errors(scr, errors)
         draw_status_bar(scr)
+        draw_category(scr)
         scr.refresh()
     draw_message(scr, message)
     scr.refresh()
@@ -142,6 +143,13 @@ def draw_status_bar(scr):
     status = "Press 1 to Exit"
     height, width = scr.getmaxyx()
     scr.addstr (height -1, (width//2)-(len(status)//2), status)
+
+def draw_category(scr):
+    scr.attron(curses.color_pair(1))
+    scr.attron(curses.A_BOLD)
+    category = "Category: Movies"
+    height, width = scr.getmaxyx()
+    scr.addstr (height//3, (width//3)-(len(category)//2), category)
 
 def main():
     curses.wrapper(draw_screen)
