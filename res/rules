@@ -1,0 +1,7 @@
+Welcome to Hangman! Here is how you play: Your goal is
+to guess the word so that your poor friend does not get
+hanged... If you press a letter, and it is correct, your
+letter will appear in the designated place on-screen. If
+you press a letter, and it is wrong, then your letter
+will appear in the error section on-screen. You have 10
+guesses; your friend will die if you lose! Have fun!
