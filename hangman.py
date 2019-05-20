@@ -24,8 +24,8 @@ def draw_title(scr, drawing): #Function for drawing the title
 def draw_echafaud(scr, drawing): #Function for drawing the different hangman stages
     scr.attron(curses.color_pair(2)) #Uses the second color pair
     scr.attron(curses.A_BOLD) #Makes the text bold
-    start_row = 1
-    start_col = 1
+    start_row = 1 #Starts the text in the first row
+    start_col = 1 #Starts the text in the first column
     idx = 0 #Variable idx equals to 0
     for item in drawing:
         scr.addstr(start_row + idx, start_col, item)
@@ -129,21 +129,21 @@ def letter_work(word, guess, errors, new_letter): #Function for determining what
 def draw_guess(scr, drawing): #Function for drawing the text before the dashes
     scr.attron(curses.color_pair(2)) #Uses the second color pair
     scr.attron(curses.A_BOLD) #Makes the text bold
-    start_row = 17
-    start_col = 47
+    start_row = 17 #Starts the text in the 17th row
+    start_col = 47 #Starts the text in the 47th column
     idx = 0 #Variable idx equals to 0
     scr.addstr(start_row, start_col - 6, 'Word:')
     for item in drawing:
         scr.addstr(start_row, start_col + idx, item)
         idx = idx + 2 #idx gets bigger by 2
 
-def draw_errors(scr, drawing): #Function for drawing the error
+def draw_errors(scr, drawing): #Function for drawing the errors
     scr.attron(curses.color_pair(1)) #Uses the first color pair
     scr.attron(curses.A_BOLD) #Makes the text bold
-    start_row = 20
-    start_col = 49
+    start_row = 20 #Starts the text in the 20th row
+    start_col = 49 #Starts the text in the 49th column
     idx = 0 #Variable idx equals to 0
-    scr.addstr(start_row, start_col - 8, 'Errors:')
+    scr.addstr(start_row, start_col - 8, 'Errors:') 
     for item in drawing:
         scr.addstr(start_row, start_col + idx, item)
         idx = idx + 2 #idx gets bigger by 2
@@ -153,8 +153,8 @@ def draw_message(scr, drawing): #Function for drawing the "Game Over!" message
     sub.box()
     sub.attron(curses.color_pair(2)) #Uses the second color pair
     sub.attron(curses.A_BOLD) #Makes the text bold
-    start_row = 1
-    start_col = 5
+    start_row = 1 #Starts the text in the first row
+    start_col = 5 #Starts the text in the 5th column
     idx = 0 #Variable idx equals to 0
     for item in drawing:
         sub.addstr(start_row + idx, start_col, item)
@@ -188,11 +188,11 @@ def draw_rules(scr, drawing): #Function for drawing rules
     sub.box()
     sub.attron(curses.color_pair(2)) #Uses the second color pair
     sub.attron(curses.A_BOLD) #Makes the text bold
-    start_row = 1
-    start_col = 5
+    start_row = 1 #Starts the text in the first row
+    start_col = 5 #Starts the text in the fifth column
     idx = 0 #Variable idx equals to 0
-    for item in drawing:
-        sub.addstr(start_row + idx, start_col, item)
+    for item in drawing: #For each character in rules
+        sub.addstr(start_row + idx, start_col, item) #Draw each letter, column by column
         idx = idx + 1 #idx gets bigger by 1
 
 def main(): #Function for starting up the program
