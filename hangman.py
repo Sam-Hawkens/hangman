@@ -52,7 +52,7 @@ def draw_screen(scr): #Function for drawing the screen
     curses.start_color()
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK) #Determines the first pair of colors
     curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK) #Determines the second pair of colors
-    draw_title(scr,title)
+    draw_title(scr,title) #Draws the title
     options = ["Endgame", "Marvel", "Iron Man", "Harry Potter", "Gryffindor"] #Defines the list options; these are all of the secret words
     w = random.choice(options) #Makes w a random word from options
     word =[] #Defines the list word as an empty list
@@ -67,8 +67,8 @@ def draw_screen(scr): #Function for drawing the screen
     draw_category(scr) #Draws the catergory and uses the necessary parameters
     while '-' in guess: #While there are hyphens in guess
         draw_guess_left(scr, left, errors)
-        key = scr.getch() #Gets the key pressed
-        letter = chr(key)
+        key = scr.getch() #Gets the information on which key was pressed
+        letter = chr(key) #Converts the ASCII number to a character
         if letter == '1': #If the letter equals to 1
             exit() #Exits the program
         if letter == '2': #If the letter equals to 2
@@ -80,7 +80,7 @@ def draw_screen(scr): #Function for drawing the screen
         if len(errors) == 9: #If the length of errors equals to 9; this may seem strange but this is how the program works
             scr.clear() #Clears the screen
             draw_message(scr, message) #Draws the message and uses the necessary parameters
-            scr.refresh()
+            scr.refresh() #Refreshes the screen
             time.sleep(2) #Waits for 2 seconds
             exit() #Exits the program
         res = letter_work(word, guess, errors, letter)
@@ -143,36 +143,36 @@ def draw_errors(scr, drawing): #Function for drawing the errors
     start_row = 20 #Starts the text in the 20th row
     start_col = 49 #Starts the text in the 49th column
     idx = 0 #Variable idx equals to 0
-    scr.addstr(start_row, start_col - 8, 'Errors:') 
+    scr.addstr(start_row, start_col - 8, 'Errors:')
     for item in drawing:
         scr.addstr(start_row, start_col + idx, item)
         idx = idx + 2 #idx gets bigger by 2
 
 def draw_message(scr, drawing): #Function for drawing the "Game Over!" message
-    sub = scr.subwin(10,70, 10, 20)
-    sub.box()
+    sub = scr.subwin(10,70, 10, 20) #Gives the coordinates for the box
+    sub.box() #Draws a box around the text
     sub.attron(curses.color_pair(2)) #Uses the second color pair
     sub.attron(curses.A_BOLD) #Makes the text bold
     start_row = 1 #Starts the text in the first row
     start_col = 5 #Starts the text in the 5th column
     idx = 0 #Variable idx equals to 0
-    for item in drawing:
-        sub.addstr(start_row + idx, start_col, item)
+    for item in drawing: #For each ite, in the message
+        sub.addstr(start_row + idx, start_col, item) #Print each letter, column by column
         idx = idx + 1 #idx gets bigger by 1
 
 def draw_status_bar(scr): #Function for drawing the status bar (thing at the bottom of the screen)
     scr.attron(curses.color_pair(1)) #Uses the first color pair
-    scr.attron(curses.A_BOLD)
-    status = "Press 1 to Exit or 2 for Rules"
-    height, width = scr.getmaxyx()
-    scr.addstr (height -1, (width//2)-(len(status)//2), status)
+    scr.attron(curses.A_BOLD) #Makes the text bold
+    status = "Press 1 to Exit or 2 for Rules" #Defines the variable status to be a sentence
+    height, width = scr.getmaxyx() #Gets the maximum values of x and y
+    scr.addstr (height -1, (width//2)-(len(status)//2), status) #Prints this message on the last line of the screen and in the middle
 
 def draw_category(scr): #Function for drawing the different hangman stages
     scr.attron(curses.color_pair(1)) #Uses the first color pair
     scr.attron(curses.A_BOLD) #Makes the text bold
-    category = "Category: Movies"
-    height, width = scr.getmaxyx()
-    scr.addstr (height//3, (width//3)-(len(category)//2), category)
+    category = "Category: Movies" #Defines category to be "Category: Movies"
+    height, width = scr.getmaxyx() #Gets the max values of x and y (how big the screen is)
+    scr.addstr (height//3, (width//3)-(len(category)//2), category) #Prints the text in category on a third of the the height, on a third of the middle, and in the middle (relatively)
 
 def draw_guess_left(scr, drawing, errors): #Function for drawing the amount of guesses left
     scr.attron(curses.color_pair(1)) #Uses the first color pair
