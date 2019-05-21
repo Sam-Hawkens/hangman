@@ -27,8 +27,8 @@ def draw_echafaud(scr, drawing): #Function for drawing the different hangman sta
     start_row = 1 #Starts the text in the first row
     start_col = 1 #Starts the text in the first column
     idx = 0 #Variable idx equals to 0
-    for item in drawing:
-        scr.addstr(start_row + idx, start_col, item)
+    for item in drawing: #For each character in the file
+        scr.addstr(start_row + idx, start_col, item) #Print each character in the desired location, 1 by 1
         idx = idx + 1 #idx gets bigger by 1
 
 def draw_screen(scr): #Function for drawing the screen
@@ -43,13 +43,13 @@ def draw_screen(scr): #Function for drawing the screen
     echafaud8 = read_drawing('res/echafaud8.txt') #Gives the directory for echafaud8.txt and reads it
     echafaud9 = read_drawing('res/echafaud9.txt') #Gives the directory for echafaud9.txt and reads it
     echafaud10 = read_drawing('res/echafaud10.txt') #Gives the directory for echafaud10.txt and reads it
-    echafauds = [echafaud1, echafaud2, echafaud3, echafaud4, echafaud5, echafaud6, echafaud7, echafaud8, echafaud9, echafaud10]
+    echafauds = [echafaud1, echafaud2, echafaud3, echafaud4, echafaud5, echafaud6, echafaud7, echafaud8, echafaud9, echafaud10] #Puts all ofthe variables into one list
     message = read_drawing('res/message.txt') #Gives the directory for message.txt and reads it
     rules = read_drawing('res/rules.txt') #Gives the directory for rules.txt and reads it
     n = 0 #Variable n equals to 0
     key = 0 #Variable key equals to 0
     scr.clear() #Wipes the screem
-    curses.start_color()
+    curses.start_color() #Initializes the curses library
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK) #Determines the first pair of colors
     curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK) #Determines the second pair of colors
     draw_title(scr,title) #Draws the title
@@ -66,14 +66,14 @@ def draw_screen(scr): #Function for drawing the screen
     draw_status_bar(scr) #Draws the status bar and uses the necessary parameters
     draw_category(scr) #Draws the catergory and uses the necessary parameters
     while '-' in guess: #While there are hyphens in guess
-        draw_guess_left(scr, left, errors)
+        draw_guess_left(scr, left, errors) #Displays the amount of guesses left using the necessary parameters
         key = scr.getch() #Gets the information on which key was pressed
         letter = chr(key) #Converts the ASCII number to a character
         if letter == '1': #If the letter equals to 1
             exit() #Exits the program
         if letter == '2': #If the letter equals to 2
             scr.clear() #Clears the screen
-            draw_rules(scr, rules)
+            draw_rules(scr, rules) #Displays the rules
             scr.refresh() #Refreshes the screen
             time.sleep(2) #Waits for 2 seconds
             scr.clear() #Clears the screen
@@ -84,10 +84,10 @@ def draw_screen(scr): #Function for drawing the screen
             time.sleep(2) #Waits for 2 seconds
             exit() #Exits the program
         res = letter_work(word, guess, errors, letter)
-        draw_guess(scr, guess)
-        draw_errors(scr, errors)
-        draw_echafaud(scr, echafauds[len(errors)])
-        draw_guess_left(scr, left, errors)
+        draw_guess(scr, guess) #Draws the guesses
+        draw_errors(scr, errors) #Displays the errors
+        draw_echafaud(scr, echafauds[len(errors)]) #Draws the necessary stage of the hangman
+        draw_guess_left(scr, left, errors) #Displays the amount of guesses left
     scr.clear() #Clears the screen
     draw_message(scr, message) #Draws the message
     scr.refresh() #Refreshes the screen
@@ -99,13 +99,13 @@ def draw_screen(scr): #Function for drawing the screen
 
 
 def word_work(str, word, guess): #Function for drawing the dashes
-    for item in str:
-        item = item.upper()
-        word.append(item)
-        if item.isalpha() != True :
-            guess.append(item)
-        else:
-            guess.append('-')
+    for item in str: #For each character in the string
+        item = item.upper() #Make it uppercase
+        word.append(item) #Add it to the end of word
+        if item.isalpha() != True : #If the character is not a letter
+            guess.append(item) #Add it to the end of guess
+        else: #Otherwise
+            guess.append('-') #Add a hyphen to the end of guess
 
 def letter_work(word, guess, errors, new_letter): #Function for determining what category a category falls under: Not a letter, Right, Wrong, Already Right, or Already Wrong
     result = 'Wrong!' #Result is "Wrong!""
