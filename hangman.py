@@ -83,7 +83,7 @@ def draw_screen(scr): #Function for drawing the screen
             scr.refresh() #Refreshes the screen
             time.sleep(2) #Waits for 2 seconds
             exit() #Exits the program
-        res = letter_work(word, guess, errors, letter)
+        letter_work(word, guess, errors, letter) #Checks whether the letter is right or wrong
         draw_guess(scr, guess) #Draws the guesses
         draw_errors(scr, errors) #Displays the errors
         draw_echafaud(scr, echafauds[len(errors)]) #Draws the necessary stage of the hangman
@@ -120,11 +120,19 @@ def letter_work(word, guess, errors, new_letter): #Function for determining what
         else: #If the letter does not fall under those two categories
             for i in range(len(word)): #For every letter in the word
                 if new_letter == word[i]: #If the letter equals to the letter
-                    guess[i] = new_letter
-                    result = 'Right!'
-            if result == 'Wrong!':
-                errors.append(new_letter)
-    return result
+                    guess[i] = new_letter #guess[i] equals to that letter
+                    result = 'Right!' #result equals to right
+            if result == 'Wrong!': #If result equals to wrong
+                errors.append(new_letter) #Add that letter to the list errors
+    return result #Returses the second color pair
+    sub.attron(curses.A_BOLD) #Makes the text bold
+    start_row = 1 #Starts the text in the first row
+    start_col = 5 #Starts the text in the fifth column
+    idx = 0 #Variable idx equals to 0
+    for item in drawing: #For each character in rules
+        sub.addstr(start_row + idx, start_col, item) #Draw each letter, column by column
+        idx = idx + 1 #idx gets bigger by 1
+ns the result
         #if new_letter
 def draw_guess(scr, drawing): #Function for drawing the text before the dashes
     scr.attron(curses.color_pair(2)) #Uses the second color pair
@@ -133,8 +141,8 @@ def draw_guess(scr, drawing): #Function for drawing the text before the dashes
     start_col = 47 #Starts the text in the 47th column
     idx = 0 #Variable idx equals to 0
     scr.addstr(start_row, start_col - 6, 'Word:')
-    for item in drawing:
-        scr.addstr(start_row, start_col + idx, item)
+    for item in drawing: #For each character
+        scr.addstr(start_row, start_col + idx, item) #Draw them in the designated positions
         idx = idx + 2 #idx gets bigger by 2
 
 def draw_errors(scr, drawing): #Function for drawing the errors
@@ -144,8 +152,8 @@ def draw_errors(scr, drawing): #Function for drawing the errors
     start_col = 49 #Starts the text in the 49th column
     idx = 0 #Variable idx equals to 0
     scr.addstr(start_row, start_col - 8, 'Errors:')
-    for item in drawing:
-        scr.addstr(start_row, start_col + idx, item)
+    for item in drawing: #For each character
+        scr.addstr(start_row, start_col + idx, item) #Draw them in the designated positions
         idx = idx + 2 #idx gets bigger by 2
 
 def draw_message(scr, drawing): #Function for drawing the "Game Over!" message
@@ -178,14 +186,14 @@ def draw_guess_left(scr, drawing, errors): #Function for drawing the amount of g
     scr.attron(curses.color_pair(1)) #Uses the first color pair
     scr.attron(curses.A_BOLD) #Makes the text bold
     left = "Guesses Left: " + str(10-len(errors))
-    if len(errors)>= 1:
-        left = left + ' '
-    height, width = scr.getmaxyx()
-    scr.addstr (height//3, (width//2), left)
+    if len(errors)>= 1: #If the length of errors is or is bigger than 1
+        left = left + ' ' #Left equals left plus a space
+    height, width = scr.getmaxyx() #Gets the maximum values for x and y
+    scr.addstr (height//3, (width//2), left) #Draws left on the top third of screen, in the middle
 
 def draw_rules(scr, drawing): #Function for drawing rules
-    sub = scr.subwin(10,70, 10, 20)
-    sub.box()
+    sub = scr.subwin(10,70, 10, 20) #Defines sub to be the coordinates of a window
+    sub.box() #Draw a box around sub
     sub.attron(curses.color_pair(2)) #Uses the second color pair
     sub.attron(curses.A_BOLD) #Makes the text bold
     start_row = 1 #Starts the text in the first row
@@ -195,8 +203,8 @@ def draw_rules(scr, drawing): #Function for drawing rules
         sub.addstr(start_row + idx, start_col, item) #Draw each letter, column by column
         idx = idx + 1 #idx gets bigger by 1
 
-def main(): #Function for starting up the program
-    curses.wrapper(draw_screen)
+def main(): #Function for how to run the screen
+    curses.wrapper(draw_screen) #Draw screen using curses
 
 if __name__ == "__main__": #Starts the cycle
-    main()
+    main() #Execute main
