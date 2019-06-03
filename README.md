@@ -8,4 +8,5 @@ For all of you who are on Windows:
 https://www.lfd.uci.edu/~gohlke/pythonlibs/#curses
 
   and then run this in command prompt:
+
 ```pip3 install <file name>.whl```
