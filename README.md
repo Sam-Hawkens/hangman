@@ -10,3 +10,10 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#curses
   and then run this in command prompt:
 
 ```pip3 install <file name>.whl```
+
+##Program Screenshots
+![Hangman Game](./screenshots/hangman_game.png)
+
+![Hangman Rules](./screenshots/rules.png)
+
+![Game Over Screen](./screenshots/game_over.png)

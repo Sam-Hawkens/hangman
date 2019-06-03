@@ -81,10 +81,13 @@ def draw_screen(scr): #Draws the screen, function is given the screen object as 
             scr.refresh() #Refreshes the screen
             time.sleep(5) #Waits for 5 seconds
             scr.clear() #Clears the screen
+        draw_title(scr,title) #Draws the title
         draw_guess(scr, guess) #Draws the guesses
         draw_errors(scr, errors) #Displays the errors
         draw_echafaud(scr, echafauds[len(errors)]) #Draws the necessary stage of the hangman
         draw_guess_left(scr, errors) #Displays the amount of guesses left
+        draw_status_bar(scr) #Draws the status bar
+        draw_category(scr) #Draws the category
     scr.clear() #Clears the screen
     draw_message(scr, game_over) #Draws the "game over" message
     scr.refresh() #Refreshes the screen
