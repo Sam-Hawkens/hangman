@@ -11,7 +11,8 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#curses
 
 ```pip3 install <file name>.whl```
 
-##Program Screenshots
+## Program Screenshots
+
 ![Hangman Game](./screenshots/hangman_game.png)
 
 ![Hangman Rules](./screenshots/rules.png)
