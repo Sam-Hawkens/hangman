@@ -11,7 +11,7 @@ IMPORTANT THINGS:
 
 Here are 3 important tips for running the program:
 1. The program cannot be run from IDLE. It can be run from command prompt (Windows) or Terminal (Linux-based operating systems).
-2. Please go to www./githib.com/sam-hawkens/hangman and follow the instructions in the README.md file if you are a Windows user and you have not already installed the curses library.
+2. Linux-based systems have the curses library pre-installed; the instructions below do not apply.
 3. If the program window is too small at any point, the program will return an error. Please make the screen larger and try again.
 4. Have fun and experiment with the code; it only gets better. :)
 
