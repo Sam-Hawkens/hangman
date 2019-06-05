@@ -122,7 +122,7 @@ def letter_work(word, guess, errors, new_letter): #Function for determining whet
                 errors.append(new_letter) #Add that letter to the end of the list of errors
     return result #Returns the result
 
-def draw_guess(scr, guess): #Function for drawing the text before the dashes
+def draw_guess(scr, guess): #Function for drawing the text before the underscores
     scr.attron(curses.color_pair(2)) #Uses the second color pair
     scr.attron(curses.A_BOLD) #Makes the text bold
     start_row = 17 #Starts on the 17th row from the top
